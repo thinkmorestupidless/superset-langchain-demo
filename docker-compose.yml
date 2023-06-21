@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  langchain:
+    container_name: langchain
+    build:
+      context: .
+      dockerfile: $PWD/infrastructure/dockerfiles/langchain/Dockerfile
+    ports:
+      - "8080:8080"
+    restart: always
+    depends_on:
+      - superset
+    #volumes:
+    #  - $PWD/langchain:/home/app
+
+  superset:
+    container_name: superset
+    build:
+      context: .
+      dockerfile: ./infrastructure/dockerfiles/superset/Dockerfile
+    ports:
+      - "8088:8088"
+    restart: always
+    environment:
+      - ADMIN_USERNAME=${ADMIN_USERNAME}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+      - ADMIN_EMAIL=${ADMIN_EMAIL}
+
+networks:
+  default:
+    name: superset-langchain-demo-default-network
