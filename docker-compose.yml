@@ -2,17 +2,17 @@ version: '3'
 
 services:
   langchain:
-    container_name: langchain
+    container_name: app
     build:
       context: .
-      dockerfile: $PWD/infrastructure/dockerfiles/langchain/Dockerfile
+      dockerfile: $PWD/infrastructure/dockerfiles/app/Dockerfile
     ports:
       - "8080:8080"
     restart: always
     depends_on:
       - superset
     #volumes:
-    #  - $PWD/langchain:/home/app
+    #  - $PWD/app:/home/app
 
   superset:
     container_name: superset
@@ -29,4 +29,4 @@ services:
 
 networks:
   default:
-    name: superset-langchain-demo-default-network
+    name: superset-app-demo-default-network

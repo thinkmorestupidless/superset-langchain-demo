@@ -2,7 +2,7 @@ FROM python:3.11-alpine
 
 WORKDIR /home/app
 
-COPY /langchain/requirements.txt /home/app/requirements.txt
+COPY /app/requirements.txt /home/app/requirements.txt
 RUN pip install --upgrade setuptools
 RUN pip install python-dotenv
 
@@ -14,6 +14,6 @@ RUN source /home/app/env/bin/activate
 # FIXME: this is causing problem `No such file or directory: 'gcc'` - seems that the `alpine` might not be suitable
 #RUN pip install -r /home/app/requirements.txt
 
-COPY /langchain /home/app/
+COPY /app /home/app/
 
 CMD [ "python", "/home/app/main.py"]

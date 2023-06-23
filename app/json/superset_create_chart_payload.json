@@ -1,0 +1,26 @@
+{
+  "cache_timeout": 0,
+  "certification_details": "string",
+  "certified_by": "string",
+  "dashboards": [
+    0
+  ],
+  "datasource_id": 0,
+  "datasource_name": "string",
+  "datasource_type": "sl_table",
+  "description": "string",
+  "external_url": "string",
+  "is_managed_externally": true,
+  "owners": [
+    0
+  ],
+  "params": "string",
+  "query_context": "string",
+  "query_context_generation": true,
+  "slice_name": "string",
+  "viz_type": [
+    "bar",
+    "area",
+    "table"
+  ]
+}
