@@ -5,17 +5,11 @@ from langchain import requests
 from langchain.tools import tool, StructuredTool
 
 from app.api.superset_api_client import superset_client
-from app.schemas.schemas import SearchInput, CreateDashboardSchema, CreateChartSchema
+from app.schemas.schemas import SearchInputSchema, CreateDashboardSchema, CreateChartSchema
 
 
-# Source: https://python.langchain.com/docs/modules/agents/tools/how_to/custom_tools
+# Source: https://python.langchain.com/docs/modules/agents/tools/how_to/custom_tools#custom-structured-tools
 
-
-# Custom Tool Decorator parameters (TODO: remove)
-# name (str), is required and must be unique within a set of tools provided to an agent
-# description (str), is optional but recommended, as it is used by an agent to determine tool use
-# return_direct (bool), defaults to False
-# args_schema (Pydantic BaseModel), is optional but recommended, can be used to provide more information (e.g., few-shot examples) or validation for expected parameters.
 
 # FIXME: using the decorator causes the issue "'StructuredTool' object has no attribute '__name__'"
 #@tool("create_dashboard", args_schema=CreateDashboardSchema)
@@ -28,28 +22,30 @@ def create_superset_dashboard(url: str, body: dict) -> str:
     result.export("one_dashboard")
     return f"The URL of the dashboard is: {result.base_url}"
 
-
 create_dashboard_tool = StructuredTool.from_function(create_superset_dashboard)
 
 
-#@tool("create_chart", args_schema=CreateChartSchema)
+@tool("create_chart", args_schema=CreateChartSchema)
 def create_superset_chart(chart_type: str, metric: str, period: str) -> str:
     """Sends a POST request to the Superset API url with the given chart type and axis values for a graph chart."""
     # WIP
     #result = superset_client.charts.add()
-    c = Chart(
-        datasource_id=dataset.id,
-        datasource_type="table",
-        slice_name=random_str(8),
-        viz_type="table",
-    )
+    # c = Chart(
+    #     datasource_id=dataset.id,
+    #     datasource_type="table",
+    #     slice_name=random_str(8),
+    #     viz_type="table",
+    # )
     # Export one dashboard
     result = superset_client.dashboards.find(dashboard_title="Unicode Test")[0]
-    result.export("one_dashboard")
-    return f"The URL to the required chart is: {result.base_url}"
+    #result.export("one_dashboard")
+    return f"The URL to the required {chart_type} chart for {metric} per {period} is: {result.base_url}"
 
+# Confirm the custom tool details
+print(create_superset_chart)
 
-create_chart_tool = StructuredTool.from_function(create_superset_chart)
+# The `tool` decorator creates a structured tool automatically if the signature has multiple arguments
+#create_superset_chart = StructuredTool.from_function(create_superset_chart)
 
 # create_chart_tool = [
 #     tool(
@@ -62,7 +58,7 @@ create_chart_tool = StructuredTool.from_function(create_superset_chart)
 
 
 
-@tool("search", return_direct=True, args_schema=SearchInput)
+@tool("search", return_direct=True, args_schema=SearchInputSchema)
 def search_api(query: str) -> str:
     """Searches the API for the query."""
     return "Results"
