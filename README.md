@@ -40,7 +40,7 @@ pip install -r app/requirements.txt
 
 
 ## Superset
-
+You can access the Superset UI from: http://localhost:8088/superset/welcome/
 
 ---
 
