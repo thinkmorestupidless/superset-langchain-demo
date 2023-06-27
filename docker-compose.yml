@@ -5,7 +5,7 @@ services:
     container_name: app
     build:
       context: .
-      dockerfile: $PWD/infrastructure/dockerfiles/app/Dockerfile
+      dockerfile: $PWD/infrastructure/dockerfiles/langchain/Dockerfile
     ports:
       - "8080:8080"
     restart: always
@@ -26,7 +26,10 @@ services:
       - ADMIN_USERNAME=${ADMIN_USERNAME}
       - ADMIN_PASSWORD=${ADMIN_PASSWORD}
       - ADMIN_EMAIL=${ADMIN_EMAIL}
+      - SUPERSET_SECRET_KEY=${SUPERSET_SECRET_KEY}
+    volumes:
+      - $PWD/infrastructure/config/superset/:/home/superset/config/
 
 networks:
   default:
-    name: superset-app-demo-default-network
+    name: superset-langchain-demo-network
