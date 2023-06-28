@@ -27,8 +27,9 @@ agent_executor = initialize_agent(
 )
 
 # App UI framework
-st.title('Sales Report Generator')
-user_input = st.text_input('Report topic: ')
+st.title('Superset Langchain Demo')
+st.subheader('by _Lunatech_')
+user_input = st.text_input('Please type your query: ')
 
 # Chaining the components and displaying outputs
 if user_input:
