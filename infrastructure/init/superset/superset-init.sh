@@ -6,7 +6,7 @@ superset fab create-admin --username "$ADMIN_USERNAME" --firstname Superset --la
 # Upgrading Superset metastore
 superset db upgrade
 
-# Load examples
+# Load examples from https://github.com/apache-superset/examples-data
 superset load_examples
 
 # setup roles and permissions

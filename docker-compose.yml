@@ -27,8 +27,10 @@ services:
       - ADMIN_PASSWORD=${ADMIN_PASSWORD}
       - ADMIN_EMAIL=${ADMIN_EMAIL}
       - SUPERSET_SECRET_KEY=${SUPERSET_SECRET_KEY}
-    volumes:
-      - $PWD/infrastructure/config/superset/:/home/superset/config/
+    #volumes:
+    #  - $PWD/infrastructure/config/superset/:/home/superset/config/
+    #extra_hosts:
+    #  - "host.docker.internal:host-gateway"
 
 networks:
   default:
