@@ -1,3 +1,7 @@
+##########################################
+# Run with: `streamlit run app/demo-ui.py`
+##########################################
+
 # Importing necessary packages, files and services
 import os 
 
