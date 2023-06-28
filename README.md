@@ -24,9 +24,17 @@
     pip install -r app/requirements.txt
     ```
 
-6. Edit the `main.py` file and uncomment the agens that you want to run
-7. Access the Superset UI from: http://localhost:8088/superset/welcome/ by providing the username/password: `admin`/`admin`
-   in order to check the charts/dashboards created.
+6. Run the app with Streamlit in order to launch the UI:
+    ```shell
+    streamlit run app/main.py
+    ```
+    This will open a new browser tab with an input field.
+
+7. Type your request for a chart or a dashboard and the answer will appear after a few seconds
+   under the input field. The answer will contain a link to the generated Superset dashboard or chart.
+
+8. Click on the link to view the generated chart or dashboard at http://localhost:8088/
+
 
 
 ## Environment Variables
@@ -119,3 +127,43 @@ by adding `PREVENT_UNSAFE_DB_CONNECTIONS = False` to the `superset_config.py` fi
 ## Car Sales Dataset Notes
 Source: https://www.kaggle.com/datasets/kyanyoga/sample-sales-data
 - Quantity Ordered - Ordered Quantity is the total item quantity ordered in the initial order (without any changes). 
+
+
+## Query Examples
+```
+# Pie charts
+agent_executor.run("Create a pie chart that shows Overall Sales (By Product Line)")
+#agent_executor.run("Create a pie chart that shows revenue by product line")
+#agent_executor.run("Create a pie chart that shows number of cars sold by vehicle category")  # expecting it to "translate" it to count per product_line
+#agent_executor.run("Create a pie chart that shows profit made by product type") # expecting it to "translate" it to count per product_line - unstable
+#agent_executor.run("Create a pie chart that shows sum of sales by deal size")
+#agent_executor.run("Create a pie chart that shows count of sales by deal size")
+#agent_executor.run("Create a pie chart that shows count of sales by territory")
+#agent_executor.run("Create a pie chart that shows number of sales by territory") # alternative to 'count of'
+#agent_executor.run("Create a pie chart that displays sum of car sales by country")
+#agent_executor.run("Create a pie chart that shows count of sales by country")
+#agent_executor.run("Create a pie chart that shows the sum of cars ordered by country") # not sure about that
+#agent_executor.run("Create a pie chart that displays sum of car sales by month")
+#agent_executor.run("Create a pie chart that displays count of sales by onth") # deliberate typo
+#agent_executor.run("Create a pie chart that displays sum of car sales by year")
+#agent_executor.run("Create a pie chart that displays count of sales by year")
+
+# Dashboards
+#agent_executor.run("Create a new superset dashboard called 'New Sales Dashboard'")
+#agent_executor.run("Create a new dashboard called 'New Sales Dashboard'")
+#agent_executor.run("Create a new 'Sales Dashboard 2022'")
+#agent_executor.run("Create a new dashboard called 'Sales 2022'")
+
+# Graph charts
+
+# ---
+
+#agent_executor.run("Create a new dashboard with the title 'Sales Dashboard 3' and slug 'test-sales-dashboard-3' and add chart 44 to it")
+#agent_executor.run("Create a pie chart that shows car sales per car model")
+#agent_executor.run("Create a pie chart that shows number of cars sold per month and add it to the Sales Dashboard")
+#agent_executor.run("Create a pie chart that shows car sales per dealership")
+#agent_executor.run("Create a line chart that shows car sales per country. Thank you!")
+
+# TODO
+#agent_executor.run("Create a pie chart that shows revenue by product line. Make it a doughnut please.")
+```

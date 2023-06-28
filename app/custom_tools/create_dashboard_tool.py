@@ -4,8 +4,8 @@ import string
 from langchain.tools import tool
 from supersetapiclient.dashboards import Dashboard
 
-from app.api.superset_api_client import superset_client
-from app.schemas.schemas import CreateDashboardSchema
+from api.superset_api_client import superset_client
+from schemas.schemas import CreateDashboardSchema
 
 
 def create_random_string(length, lowercase=True):

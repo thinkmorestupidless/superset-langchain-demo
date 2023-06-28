@@ -3,9 +3,9 @@ from pydantic import BaseModel, Field
 
 class CreateDashboardSchema(BaseModel):
     dashboard_title: str = Field(description="should be a string representing the title of the new Superset Dashboard")
-    #slug: str = Field("should be a unique string representing the last part of the Dashboard's URL "
+    # slug: str = Field("should be a unique string representing the last part of the Dashboard's URL "
     #                  "http://localhost:8088/superset/dashboard/{slug}")
-    #chart: str = Field("should be the optional id of the chart to get added to the Dashboard")
+    # chart: str = Field("should be the optional id of the chart to get added to the Dashboard")
 
 
 class CreatePieChartSchema(BaseModel):

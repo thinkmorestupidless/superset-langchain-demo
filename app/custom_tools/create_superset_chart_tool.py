@@ -3,8 +3,8 @@ import json
 from langchain.tools import tool
 from supersetapiclient.charts import Chart
 
-from app.api.superset_api_client import superset_client
-from app.schemas.schemas import CreatePieChartSchema
+from api.superset_api_client import superset_client
+from schemas.schemas import CreatePieChartSchema
 
 
 # TODO: add optional parameter "dashboard" so we can add the chart to a specific dashboard

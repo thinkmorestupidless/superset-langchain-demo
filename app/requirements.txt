@@ -2,5 +2,6 @@ google-search-results
 langchain
 openai
 python-dotenv
+streamlit
 superset-api-client
 wikipedia
