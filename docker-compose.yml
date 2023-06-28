@@ -2,7 +2,7 @@ version: '3'
 
 services:
   langchain:
-    container_name: langchain
+    container_name: app
     build:
       context: .
       dockerfile: $PWD/infrastructure/dockerfiles/langchain/Dockerfile
@@ -12,7 +12,7 @@ services:
     depends_on:
       - superset
     #volumes:
-    #  - $PWD/langchain:/home/app
+    #  - $PWD/app:/home/app
 
   superset:
     container_name: superset
@@ -26,7 +26,12 @@ services:
       - ADMIN_USERNAME=${ADMIN_USERNAME}
       - ADMIN_PASSWORD=${ADMIN_PASSWORD}
       - ADMIN_EMAIL=${ADMIN_EMAIL}
+      - SUPERSET_SECRET_KEY=${SUPERSET_SECRET_KEY}
+    #volumes:
+    #  - $PWD/infrastructure/config/superset/:/home/superset/config/
+    #extra_hosts:
+    #  - "host.docker.internal:host-gateway"
 
 networks:
   default:
-    name: superset-langchain-demo-default-network
+    name: superset-langchain-demo-network
