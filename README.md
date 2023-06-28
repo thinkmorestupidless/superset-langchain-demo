@@ -28,6 +28,14 @@
 7. Access the Superset UI from: http://localhost:8088/superset/welcome/ by providing the username/password: `admin`/`admin`
    in order to check the charts/dashboards created.
 
+or
+(WORK IN PROGRESS)
+Run the app with Streamlit in order to use a UI:
+```shell
+streamlit run app/ui.py
+```
+This will open a new browser tab at: http://localhost:8501/
+
 
 ## Environment Variables
 There is an `.env.template` file that you should copy and rename to `.env`.
