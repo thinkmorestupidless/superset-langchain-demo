@@ -1,3 +1,6 @@
+import random
+import string
+
 from langchain.tools import tool
 from supersetapiclient.dashboards import Dashboard
 
@@ -5,17 +8,26 @@ from app.api.superset_api_client import superset_client
 from app.schemas.schemas import CreateDashboardSchema
 
 
-@tool("create_dashboard_tool", args_schema=CreateDashboardSchema)
-def create_dashboard(title: str, slug: str, chart: str) -> str:
-    """Sends a POST request to the Superset API url with the given body and parameters."""
-    requested_dashboard = Dashboard(
-        dashboard_title=title,
-        published=True,
-        slug=slug,
-        # charts=charts TODO: add the charts what we want to this dashboard (charts: List[str])
-    )
-    result = superset_client.dashboards.add(requested_dashboard)
+def create_random_string(length, lowercase=True):
+    chars = string.ascii_lowercase if lowercase else string.ascii_letters
+    return "".join(random.choice(chars) for _ in range(length))
 
-    # result = superset_client.dashboards.find(dashboard_title="Unicode Test")[0]
-    # result.export("one_dashboard")
-    return f"Your new {title} has been created and you can access it here: http://localhost:8088/superset/dashboard/{slug}"
+
+# TODO: add optional parameter "chart: Optional[str]" so we can add the chart to a specific dashboard
+# There's an issue on that https://github.com/opus-42/superset-api-client/issues/15
+# Workaround is to add the chart to the dashboard when we create a chart
+@tool("create_dashboard_tool", args_schema=CreateDashboardSchema)
+def create_dashboard(dashboard_title: str) -> str:
+    """Sends a POST request to the Superset API with the given dashboard title and creates a new dashboard"""
+
+    dashboard = Dashboard(
+        dashboard_title=dashboard_title,
+        published=True,
+        slug=create_random_string(10)
+    )
+
+    # add it to the list of dashboards
+    superset_client.dashboards.add(dashboard)
+
+    return f"Your new {dashboard_title} has been created and you can access it here: " \
+           f"http://localhost:8088/superset/dashboard/{dashboard.slug}"
