@@ -2,7 +2,8 @@ from dotenv import load_dotenv, find_dotenv
 from langchain import OpenAI
 from langchain.agents import initialize_agent, AgentType
 
-from app.tools import create_superset_chart, create_dashboard
+from app.custom_tools.create_dashboard_tool import create_dashboard
+from app.custom_tools.create_superse_chart_tool import create_superset_chart
 
 # Load environment variables
 load_dotenv(find_dotenv())
@@ -20,11 +21,12 @@ agent_executor = initialize_agent(
 )
 
 # Run the agent
+agent_executor.run("Create a new dashboard with the title 'Sales Dashboard 3' and slug 'test-sales-dashboard-3' and add chart 44 to it")
+#agent_executor.run("Create a pie chart that shows car sales per car model")
+#agent_executor.run("Create a pie chart that shows SUM of sales per model")
 #agent_executor.run("Create a pie chart that shows number of cars sold per month and add it to the Sales Dashboard")
-agent_executor.run("Create a pie chart that shows car sales per car model")
 #agent_executor.run("Create a pie chart that shows car sales per dealership")
 #agent_executor.run("Create a line chart that shows car sales per country. Thank you!")
-#agent_executor.run("Create a new dashboard with the title 'Sales Dashboard 2' and slug 'test-sales-dashboard-2'")
 
 # FIXME: expected this to fail but didn't:
 #agent_executor.run("Show me sales per month")
