@@ -8,8 +8,8 @@ from app.custom_tools.create_superset_chart_tool import create_superset_chart
 # Load environment variables
 load_dotenv(find_dotenv())
 
-# Initialise the LLM to use for the agent
-llm = OpenAI(model_name="text-davinci-003")
+# Initialise the LLM to use for the agent - adjust the temperature to modify probability of results
+llm = OpenAI(model_name="text-davinci-003", temperature=0.3)
 
 # Initialise an agent with the custom `create_superset_char` tool, the language model, and the type of agent we want
 # to use
@@ -22,7 +22,7 @@ agent_executor = initialize_agent(
 
 # Run the agent
 # Pie charts
-#agent_executor.run("Create a pie chart that shows Overall Sales (By Product Line)")
+agent_executor.run("Create a pie chart that shows Overall Sales (By Product Line)")
 #agent_executor.run("Create a pie chart that shows revenue by product line")
 #agent_executor.run("Create a pie chart that shows number of cars sold by vehicle category")  # expecting it to "translate" it to count per product_line
 #agent_executor.run("Create a pie chart that shows profit made by product type") # expecting it to "translate" it to count per product_line - unstable

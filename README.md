@@ -32,9 +32,13 @@ or
 (WORK IN PROGRESS)
 Run the app with Streamlit in order to use a UI:
 ```shell
-streamlit run app/ui.py
+streamlit run app/demo-ui.py
 ```
-This will open a new browser tab at: http://localhost:8501/
+or
+```shell
+streamlit run app/app-ui.py
+```
+This will open a new browser tab where you can view the form that asks user input to generate sales reports.
 
 
 ## Environment Variables
