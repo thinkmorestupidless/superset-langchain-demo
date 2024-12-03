@@ -3,15 +3,11 @@ from typing import Optional
 import requests
 from langchain import requests
 from langchain.tools import tool
-from supersetapiclient.charts import Chart
-from supersetapiclient.dashboards import Dashboard
 
-import json
-from app.api.superset_api_client import superset_client
-from app.schemas.schemas import SearchInputSchema, CreateDashboardSchema, CreateChartSchema, \
-    CreateLineBarAreaChartSchema
+from app.schemas.schemas import SearchInputSchema
 
 
+# TODO: remove - these are not being used
 @tool("search", return_direct=True, args_schema=SearchInputSchema)
 def search_api(query: str) -> str:
     """Searches the API for the query."""
